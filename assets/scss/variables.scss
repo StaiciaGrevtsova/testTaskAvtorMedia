@@ -1,0 +1,36 @@
+$--grid-breakpoints: (
+  xs: 0,
+  sm: 580px,
+  md: 768px,
+  lg: 992px,
+  xl: 1220px
+);
+
+$--container-max-width: 1400px;
+$--container-padding: 90px;
+
+$--color-primary: #000000;
+$--color-action: #FF008A;
+$--color-disabled: #E2E2E2;
+$--color-error: #ff3d3d;
+
+$--font-size-base: 17px;
+$--font-size-large: 24px;
+
+
+@function breakpoint-min($name, $breakpoints: $--grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $--grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
